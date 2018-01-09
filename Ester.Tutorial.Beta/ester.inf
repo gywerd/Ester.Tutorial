@@ -1,0 +1,48 @@
+[Version]
+Signature   = "$Windows NT$"        ; required as-is
+Provider    = "Alef Systemer"           ; maximum of 30 characters, full app name will be "<Provider> <AppName>"
+CESignature = "$Windows CE$"        ; required as-is
+ 
+[CEStrings]
+AppName     = "Ester.Tutorial.Beta"        ; maximum of 40 characters, full app name will be "<Provider> <AppName>"
+InstallDir  = %CE1%\%AppName%       ; Program Files\Ester.Tutorial.Beta
+ 
+[SourceDisksNames]                  ; directory that holds the application's files
+1 = , "Common Files",,Common
+ 
+[SourceDisksFiles]                  ; list of files to be included in .cab
+Ester.Tutorial.Core.dll = 1
+Ester.Tutorial.Core.pdb = 1
+Ester.Tutorial.DataAccess.dll = 1
+Ester.Tutorial.DataAccess.pdb = 1
+Ester.Tutorial.GUI.exe = 1
+Ester.Tutorial.GUI.exe.config = 1
+Ester.Tutorial.GUI.pdb = 1
+ester.ico = 1
+
+ 
+[DefaultInstall]                    ; operations to be completed during install
+CopyFiles   = CopyToProgramFiles
+AddReg      = RegData
+CEShortcuts = Shortcuts   
+ 
+[DestinationDirs]                   ; default destination directories for each operation section
+CopyToProgramFiles    = 0, %InstallDir%
+Shortcuts   = 0, %CE11%\%AppName%; \Windows\Start Menu\Programs\Ester.Tutorial.Beta
+ 
+[CopyToProgramFiles]                ; copy operation file list
+"Ester.Tutorial.Core.dll", Ester.Tutorial.Core.dll
+"Ester.Tutorial.Core.pdb", Ester.Tutorial.Core.pdb
+"Ester.Tutorial.DataAccess.dll", Ester.Tutorial.DataAccess.dll
+"Ester.Tutorial.DataAccess.pdb", Ester.Tutorial.DataAccess.pdb
+"Ester.Tutorial.GUI.exe", Ester.Tutorial.GUI.exe
+"Ester.Tutorial.GUI.exe.config", Ester.Tutorial.GUI.exe.config 
+"Ester.Tutorial.GUI.pdb", Ester.Tutorial.GUI.pdb 
+"ester.ico", ester.ico
+ 
+[RegData]                           ; registry key list
+HKCU,Software\%AppName%,MajorVersion,0x00010001,0
+HKCU,Software\%AppName%,MinorVersion,0x00010001,1
+ 
+[Shortcuts]                         ; Shortcut created in destination dir, %CE11%\%AppName%
+%AppName%,0,Ester.Tutorial.GUI.exe
